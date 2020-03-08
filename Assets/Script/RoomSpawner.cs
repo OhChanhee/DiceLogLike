@@ -4,22 +4,23 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public class RoomSpawner : MonoBehaviour
 {
+    public GameObject Room;
+    public GameObject FloorTile;
+    public GameObject WallTile;
     public int OpeningDirection;
     // 0 --> 첫번쨰 방 스포너
     // 1 --> 위쪽 문이 필요함
     // 2 --> 아래쪽 문이 필요함
     // 3 --> 오른쪽 문이 필요함
     // 4 --> 왼쪽 문이 필요함
+    private int columns = 21;
+    private int rows = 13;
 
-    private RoomTemplate Templates;
-    private int rand;
-    private Transform Rooms;
-    private GameObject SpawnedRoom;
+    public List<GameObject[]> RoomInfo = new List<GameObject[]>();
     private bool Spawned = false;
     void Awake()
     {
-        Templates = GameObject.FindWithTag("RoomTemplate").GetComponent<RoomTemplate>();
-        Rooms = GameObject.FindWithTag("Rooms").GetComponent<Transform>();
+        
     }
     void Start()
     {      
@@ -32,33 +33,23 @@ public class RoomSpawner : MonoBehaviour
         {
             if (OpeningDirection == 0)
             {
-                rand = Random.Range(0, Templates.ALLROOM.Length);
-                SpawnedRoom = Instantiate(Templates.ALLROOM[rand], transform.position, Templates.ALLROOM[rand].transform.rotation);
-                SpawnedRoom.transform.parent = Rooms;
+                MakeRoom();
             }
             else if (OpeningDirection == 1)
             {
-                rand = Random.Range(0, Templates.TopRoom.Length);
-                SpawnedRoom = Instantiate(Templates.TopRoom[rand], transform.position, Templates.TopRoom[rand].transform.rotation);
-                SpawnedRoom.transform.parent = Rooms;
+                MakeRoom();
             }
             else if (OpeningDirection == 2)
             {
-                rand = Random.Range(0, Templates.BottomRoom.Length);
-                SpawnedRoom = Instantiate(Templates.BottomRoom[rand], transform.position, Templates.BottomRoom[rand].transform.rotation);
-                SpawnedRoom.transform.parent = Rooms;
+                MakeRoom();
             }
             else if (OpeningDirection == 3)
             {
-                rand = Random.Range(0, Templates.RightRoom.Length);
-                SpawnedRoom = Instantiate(Templates.RightRoom[rand], transform.position, Templates.RightRoom[rand].transform.rotation);
-                SpawnedRoom.transform.parent = Rooms;
+                MakeRoom();
             }
             else if (OpeningDirection == 4)
             {
-                rand = Random.Range(0, Templates.LeftRoom.Length);
-                SpawnedRoom = Instantiate(Templates.LeftRoom[rand], transform.position, Templates.LeftRoom[rand].transform.rotation);
-                SpawnedRoom.transform.parent = Rooms;
+                MakeRoom();
             }
             Spawned = true;
         }
@@ -71,6 +62,32 @@ public class RoomSpawner : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void MakeRoom()
+    {
+        int rand = Random.Range(0, 16);//문방향 설정 0 상하좌우 1 
+        GameObject RoomParent = Instantiate(Room);
+        for (int x=0 ; x < columns+1 ; x++)
+        {
+            for(int y=0 ; y < rows+1; y++)
+            {
+                if(x==0 || x==columns || y==0 || y==rows)
+                {
+                    GameObject Wall = Instantiate(WallTile, new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y), WallTile.transform.rotation);
+                    Wall.name = "WallTile(" + x + "," + y + ")";
+                    Wall.transform.parent = RoomParent.transform;
+                }
+                else
+                {
+                    GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y), FloorTile.transform.rotation);
+                    Floor.name = "FloorTile(" + x + "," + y + ")";
+                    Floor.transform.parent = RoomParent.transform;
+                }
+              
+            }
+        }
+        
     }
 
 
