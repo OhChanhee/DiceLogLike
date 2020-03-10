@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Coordinate : MonoBehaviour
 {
-    private int _x;
-    private int _y;
-
+    private int _x =0;
+    private int _y =0;
+    
     public int x
     {
         get
         {
             return _x;
         }
+
         set
         {
             _x = value;
@@ -24,9 +25,28 @@ public class Coordinate : MonoBehaviour
         {
             return _y;
         }
+
         set
         {
             _y = value;
         }
+    }
+
+
+    public bool CompareCoordinate(Coordinate coordinate)
+    {
+        if (coordinate.x == _x && coordinate.y == _y)
+        {
+            return true;
+        }
+        else return false;
+    }
+    public bool CompareCoordinate(int x, int y)
+    {
+        if (x == _x && y == _y)
+        {
+            return true;
+        }
+        else return false;
     }
 }

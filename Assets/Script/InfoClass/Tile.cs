@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    private Coordinate TileCoordinate = new Coordinate();
+    public int x=0;
+    public int y=0;
     public TileType TileType;
     public void SetTileInfo(int x,int y)
     {
        
-        TileCoordinate.x = x;      
-        TileCoordinate.y = y;
-        Debug.Log(TileCoordinate.x +","+TileCoordinate.y);
+        this.x = x;
+        this.y = y;
+ 
     }
     
 
