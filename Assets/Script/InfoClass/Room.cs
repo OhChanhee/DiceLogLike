@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public int x;
-    public int y;
+    public int x = 0;
+    public int y = 0;
     private List<Tile> Tilelist = new List<Tile>();
     ROOMType RooMType;
     
@@ -62,13 +62,6 @@ public class Room : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("SpawnPoint") && other.GetComponent<Room>().Spawned == true)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void TilePlacement()
     {
