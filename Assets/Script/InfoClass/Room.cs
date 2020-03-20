@@ -30,7 +30,7 @@ public class Room : MonoBehaviour
     }
     void Start()
     {
-        Invoke("Spawn", 0.1f);
+       // Invoke("Spawn", 0.1f);
     }
 
     void Spawn()
