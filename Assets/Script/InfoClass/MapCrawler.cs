@@ -11,7 +11,7 @@ public class MapCrawler : MonoBehaviour
 
     public Coordinate CrawlerCoordinate = new Coordinate();
     public int CrawlerNum;
-    public Vector2 CrawlerPosition = new Vector2(-10.5f,-6.5f);
+    public Vector2 CrawlerPosition = new Vector2(0,0);
     private void Start()
     {
         CrawlerCoordinate.x = 0;
@@ -22,7 +22,7 @@ public class MapCrawler : MonoBehaviour
     {
         CrawlerCoordinate.x = 0;
         CrawlerCoordinate.y = 0;
-        CrawlerPosition = new Vector2(-10.5f, -6.5f);
+        CrawlerPosition = new Vector2(0,0);
     }
 
 }

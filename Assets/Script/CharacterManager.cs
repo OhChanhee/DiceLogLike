@@ -15,9 +15,16 @@ public class CharacterManager : MonoBehaviour
         return instance;
     }
 
+    void Start()
+    {
+      //gameObject.transform.position =   
+    }
     public delegate int TileDelegate();
     Transform TR;
-    public Coordinate Ch_RoomCordinate = new Coordinate(); // 캐릭터가있는 방의 좌표;
-    public Coordinate ChCoordinate = new Coordinate(); // 캐릭터가 위치하고있는 타일의 좌표;
+    public Coordinate Ch_RoomCordinate = new Coordinate(); // 캐릭터가있는 방의 좌표
     
+
+  
+
+
 }

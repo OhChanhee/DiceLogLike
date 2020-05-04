@@ -43,6 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153628dc65ef65144b834d802e459f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  RoomTemp: {fileID: 6727004619169584052, guid: 1be62dde5b1bddd42bd3745be72ed391,
+    type: 3}
   FloorTile: {fileID: 1747858977891047955, guid: af296ffc8f6a4624a8fb28bdaa2a9e77,
     type: 3}
   WallTile: {fileID: 7274595126125523770, guid: a38c0dd5276400744b536c02b338ad5f,

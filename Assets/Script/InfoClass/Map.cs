@@ -20,10 +20,10 @@ public class Map : MonoBehaviour
         Roomlist.Add(room);
     }
 
-    private Vector2 up = new Vector2(0,14);
-    private Vector2 down = new Vector2(0,-14);
-    private Vector2 left = new Vector2(-22, 0f);
-    private Vector2 right = new Vector2(22, 0f);
+    private Vector2 up = new Vector2(0,16);
+    private Vector2 down = new Vector2(0,-16);
+    private Vector2 left = new Vector2(-28.6f, 0f);
+    private Vector2 right = new Vector2(28.6f, 0f);
 
     void MapCrawling()
     {

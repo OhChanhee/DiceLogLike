@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+
     public int x = 0;
     public int y = 0;
     private List<Tile> Tilelist = new List<Tile>();
     ROOMType RooMType;
-    
-    
 
+
+    public GameObject RoomTemp;
     public GameObject FloorTile;
     public GameObject WallTile;
     public GameObject DoorTile;
@@ -20,8 +21,8 @@ public class Room : MonoBehaviour
     // 2 --> 아래쪽 문이 필요함
     // 3 --> 오른쪽 문이 필요함
     // 4 --> 왼쪽 문이 필요함
-    private int rows = 13;
-    private int columns = 21;
+    private int rows = 12;
+    private int columns = 22;
 
     private bool Spawned = false;
     void Awake()
@@ -30,8 +31,14 @@ public class Room : MonoBehaviour
     }
     void Start()
     {
-       // Invoke("Spawn", 0.1f);
+  
     }
+
+    void Update()
+    {
+        CheckNearCharacter();
+    }
+
 
     void Spawn()
     {
@@ -59,31 +66,29 @@ public class Room : MonoBehaviour
             }
             Spawned = true;
         }
-
     }
 
 
     void TilePlacement()
     {
         int DoorDirection = Random.Range(0, 16);//문방향 설정 0  
-        
-       
 
-        for (int y = 0; y < rows + 1; y++)
+
+        for (int y = 0; y < rows ; y++)
         {
-            for (int x = 0; x < columns + 1; x++)
+            for (int x = 0; x < columns ; x++)
             {
-                if (x == 0 || x == columns || y == 0 || y == rows)// Wall 타일을 테두리에 깔아주는 조건문
+                /*if (x == 0 || x == columns || y == 0 || y == rows)// Wall 타일을 테두리에 깔아주는 조건문
                 {
                     GameObject Wall = Instantiate(WallTile, new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y), WallTile.transform.rotation);
                     Wall.name = "WallTile(" + x + "," + y + ")";
                     Wall.transform.parent = this.transform;
                     Wall.GetComponent<Tile>().SetTileInfo(x, y);
                     SetTileList(Wall.GetComponent<Tile>());
-                }
-                else // FloorTile 을 깔아주는 조건문
+                }*/
+                 // FloorTile 을 깔아주는 조건문
                 {
-                    GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y), FloorTile.transform.rotation);
+                    GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x -10.5f + x, gameObject.transform.position.y -5.5f+ y), FloorTile.transform.rotation);
                     Floor.name = "FloorTile(" + x + "," + y + ")";
                     Floor.transform.parent = this.transform;
                     Floor.GetComponent<Tile>().SetTileInfo(x, y);
@@ -98,6 +103,7 @@ public class Room : MonoBehaviour
     {
         Tilelist.Add(tile);
     }
+
     public void SetRoomInfo(int x, int y)
     {
 
@@ -106,4 +112,12 @@ public class Room : MonoBehaviour
 
     }
 
+    public void CheckNearCharacter()
+    {
+        if( (this.x + 1 ==CharacterManager.GetInstance().Ch_RoomCordinate.x || this.x - 1 == CharacterManager.GetInstance().Ch_RoomCordinate.x || this.x == CharacterManager.GetInstance().Ch_RoomCordinate.x )
+            && (this.y - 1 == CharacterManager.GetInstance().Ch_RoomCordinate.y || this.y + 1 == CharacterManager.GetInstance().Ch_RoomCordinate.y || this.y == CharacterManager.GetInstance().Ch_RoomCordinate.y))
+        {
+            Invoke("Spawn", 0.1f);
+        }
+    }
 }
