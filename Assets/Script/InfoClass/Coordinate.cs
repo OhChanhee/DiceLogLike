@@ -2,51 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coordinate : MonoBehaviour
+public struct Coordinate
 {
-    private int _x =0;
-    private int _y =0;
+    public int x;
+    public int y;
     
-    public int x
+    public Coordinate(int x,int y)
     {
-        get
-        {
-            return _x;
-        }
-
-        set
-        {
-            _x = value;
-        }
+        this.x = x;
+        this.y = y;
     }
-    public int y
-    {
-        get
-        {
-            return _y;
-        }
 
-        set
-        {
-            _y = value;
-        }
+    public static Coordinate operator +(Coordinate a, Coordinate b)
+    {
+        return new Coordinate(a.x + b.x, a.y + b.y);
+    }
+    public static Coordinate operator -(Coordinate p1, Coordinate p2)
+    {
+        return new Coordinate(p1.x - p2.x, p1.y - p2.y);
+    }
+    public static bool operator ==(Coordinate a, Coordinate b)
+    {
+        return a.x == b.x && a.y == b.y;
+    }
+    public static bool operator !=(Coordinate a, Coordinate b)
+    {
+        return !(a == b);
     }
 
 
-    public bool CompareCoordinate(Coordinate coordinate)
+    public override bool Equals(object obj)
     {
-        if (coordinate.x == _x && coordinate.y == _y)
+        if (obj is Coordinate)
         {
-            return true;
+            Coordinate p = (Coordinate)obj;
+            return x == p.x && y == p.y;
         }
-        else return false;
+        return false;
     }
-    public bool CompareCoordinate(int x, int y)
+    public bool Equals(Coordinate p)
     {
-        if (x == _x && y == _y)
-        {
-            return true;
-        }
-        else return false;
+        return x == p.x && y == p.y;
+    }
+    public override int GetHashCode()
+    {
+        return x ^ y;
+    }
+
+    public override string ToString()
+    {
+        return string.Format("({0},{1})", x, y);
     }
 }
+ 
+

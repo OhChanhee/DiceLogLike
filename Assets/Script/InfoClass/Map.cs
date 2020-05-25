@@ -39,7 +39,7 @@ public class Map : MonoBehaviour
                 {                 
                     crawler.CrawlerCoordinate.y++;
                     crawler.CrawlerPosition += up;               
-                        if (IsRoomCoordinate(crawler.CrawlerCoordinate))
+                        if (!IsRoomCoordinate(crawler.CrawlerCoordinate))
                         {
                             RoomPlacement();
                         }
@@ -53,7 +53,7 @@ public class Map : MonoBehaviour
                     crawler.CrawlerCoordinate.y--;
                     crawler.CrawlerPosition += down;
 
-                        if (IsRoomCoordinate(crawler.CrawlerCoordinate))
+                        if (!IsRoomCoordinate(crawler.CrawlerCoordinate))
                         {
                             RoomPlacement();
                          }
@@ -67,7 +67,7 @@ public class Map : MonoBehaviour
                     crawler.CrawlerCoordinate.x--;
                     crawler.CrawlerPosition += left;
                     
-                        if (IsRoomCoordinate(crawler.CrawlerCoordinate))
+                        if (!IsRoomCoordinate(crawler.CrawlerCoordinate))
                         {
                             RoomPlacement();
                          }
@@ -81,7 +81,7 @@ public class Map : MonoBehaviour
                     crawler.CrawlerCoordinate.x++;
                     crawler.CrawlerPosition += right;
                 
-                        if (IsRoomCoordinate(crawler.CrawlerCoordinate))
+                        if (!IsRoomCoordinate(crawler.CrawlerCoordinate))
                         {
                             RoomPlacement();    
                         }
@@ -110,19 +110,32 @@ public class Map : MonoBehaviour
 
     public bool IsRoomCoordinate(Coordinate coordinate)
     {
-        bool IsPass = true;
         for (int i = 0; i < Roomlist.Count; i++)
         {       
-            if (Roomlist[i].x==coordinate.x && Roomlist[i].y == coordinate.y)
+            if (Roomlist[i].Roomcoordinate==coordinate)
             {
-                IsPass = false;
-                break;
-            }
-            else
-            {
-                IsPass = true;
+                return true;
             }
         }
-        return IsPass;
+        return false;
+    }
+    public bool IsRoomCoordinate(int x, int y)
+    {
+        for (int i = 0; i < Roomlist.Count; i++)
+        {
+            if (Roomlist[i].Roomcoordinate.x == x && Roomlist[i].Roomcoordinate.y == y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void debugMapList()
+    {
+        for (int i = 0; i < Roomlist.Count;i++)
+        {
+            Debug.Log("x: "+Roomlist[i].Roomcoordinate.x + "y: "+Roomlist[i].Roomcoordinate.y);
+        }
     }
 }

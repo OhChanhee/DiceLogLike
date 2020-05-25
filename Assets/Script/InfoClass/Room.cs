@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    //좌표
+    public Coordinate Roomcoordinate;
 
-    public int x = 0;
-    public int y = 0;
     private List<Tile> Tilelist = new List<Tile>();
-    ROOMType RooMType;
+    ROOMType RooMType; 
 
+    public GameObject TopDoor;
+    public GameObject BottomDoor;
+    public GameObject LeftDoor;
+    public GameObject RightDoor;
 
-    public GameObject RoomTemp;
+    public GameObject RoomTemp; // 방 기본 구조 오브젝트
+
     public GameObject FloorTile;
     public GameObject WallTile;
     public GameObject DoorTile;
-    public int OpeningDirection;
-    // 0 --> 첫번쨰 방 스포너
-    // 1 --> 위쪽 문이 필요함
-    // 2 --> 아래쪽 문이 필요함
-    // 3 --> 오른쪽 문이 필요함
-    // 4 --> 왼쪽 문이 필요함
-    private int rows = 12;
-    private int columns = 22;
+
+    private Map map; // 맵정보
+
+    private int rows = 12; // 방세로 타일갯수
+    private int columns = 22; //방가로 타일갯수
 
     private bool Spawned = false;
-    void Awake()
-    {
-    
-    }
+
     void Start()
     {
-  
+        map = GameObject.Find("Map").GetComponent<Map>();
+        ChooseDoorDirection();
     }
 
     void Update()
@@ -44,26 +44,7 @@ public class Room : MonoBehaviour
     {
         if (!Spawned)
         {
-            if (OpeningDirection == 0)
-            {
-                TilePlacement();
-            }
-            else if (OpeningDirection == 1)
-            {
-                TilePlacement();
-            }
-            else if (OpeningDirection == 2)
-            {
-                TilePlacement();
-            }
-            else if (OpeningDirection == 3)
-            {
-                TilePlacement();
-            }
-            else if (OpeningDirection == 4)
-            {
-                TilePlacement();
-            }
+            TilePlacement();
             Spawned = true;
         }
     }
@@ -74,27 +55,16 @@ public class Room : MonoBehaviour
         int DoorDirection = Random.Range(0, 16);//문방향 설정 0  
 
 
-        for (int y = 0; y < rows ; y++)
+        for (int y = 0; y < rows; y++)
         {
-            for (int x = 0; x < columns ; x++)
+            for (int x = 0; x < columns; x++)
             {
-                /*if (x == 0 || x == columns || y == 0 || y == rows)// Wall 타일을 테두리에 깔아주는 조건문
-                {
-                    GameObject Wall = Instantiate(WallTile, new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y), WallTile.transform.rotation);
-                    Wall.name = "WallTile(" + x + "," + y + ")";
-                    Wall.transform.parent = this.transform;
-                    Wall.GetComponent<Tile>().SetTileInfo(x, y);
-                    SetTileList(Wall.GetComponent<Tile>());
-                }*/
-                 // FloorTile 을 깔아주는 조건문
-                {
-                    GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x -10.5f + x, gameObject.transform.position.y -5.5f+ y), FloorTile.transform.rotation);
-                    Floor.name = "FloorTile(" + x + "," + y + ")";
-                    Floor.transform.parent = this.transform;
-                    Floor.GetComponent<Tile>().SetTileInfo(x, y);
-                    SetTileList(Floor.GetComponent<Tile>());
-                }
-
+                // FloorTile 을 깔아주는 조건문            
+                GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x - 10.5f + x, gameObject.transform.position.y - 5.5f + y), FloorTile.transform.rotation);
+                Floor.name = "FloorTile(" + x + "," + y + ")";
+                Floor.transform.parent = this.transform;
+                Floor.GetComponent<Tile>().SetTileInfo(x, y);
+                SetTileList(Floor.GetComponent<Tile>());
             }
         }
     }
@@ -106,18 +76,47 @@ public class Room : MonoBehaviour
 
     public void SetRoomInfo(int x, int y)
     {
-
-        this.x = x;
-        this.y = y;
+        Roomcoordinate = new Coordinate();
+        this.Roomcoordinate.x = x;
+        this.Roomcoordinate.y = y;
 
     }
 
     public void CheckNearCharacter()
     {
-        if( (this.x + 1 ==CharacterManager.GetInstance().Ch_RoomCordinate.x || this.x - 1 == CharacterManager.GetInstance().Ch_RoomCordinate.x || this.x == CharacterManager.GetInstance().Ch_RoomCordinate.x )
-            && (this.y - 1 == CharacterManager.GetInstance().Ch_RoomCordinate.y || this.y + 1 == CharacterManager.GetInstance().Ch_RoomCordinate.y || this.y == CharacterManager.GetInstance().Ch_RoomCordinate.y))
+        if ((this.Roomcoordinate.x + 1 == GameManager.GetInstance().Ch_RoomCordinate.x ||
+            this.Roomcoordinate.x - 1 == GameManager.GetInstance().Ch_RoomCordinate.x ||
+            this.Roomcoordinate.x == GameManager.GetInstance().Ch_RoomCordinate.x)
+            && (this.Roomcoordinate.y - 1 == GameManager.GetInstance().Ch_RoomCordinate.y ||
+            this.Roomcoordinate.y + 1 == GameManager.GetInstance().Ch_RoomCordinate.y ||
+            this.Roomcoordinate.y == GameManager.GetInstance().Ch_RoomCordinate.y))
         {
             Invoke("Spawn", 0.1f);
+        }
+    }
+
+    public void ChooseDoorDirection()
+    {
+
+        if (map.IsRoomCoordinate(Roomcoordinate.x + 1, Roomcoordinate.y))
+        {
+            RightDoor.SetActive(true);
+          
+        }
+        if (map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y + 1))
+        {
+            TopDoor.SetActive(true);
+          
+        }
+        if (map.IsRoomCoordinate(Roomcoordinate.x - 1, Roomcoordinate.y ))
+        {
+            LeftDoor.SetActive(true);
+         
+        }
+        if (map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y -1 ))
+        {
+            BottomDoor.SetActive(true);
+   
         }
     }
 }

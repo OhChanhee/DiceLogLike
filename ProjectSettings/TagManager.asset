@@ -41,7 +41,10 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BackGround
+  - name: Wall
+    uniqueID: 2556369785
+    locked: 0
+  - name: Door
     uniqueID: 3934740803
     locked: 0
   - name: Character
