@@ -131,6 +131,29 @@ public class Map : MonoBehaviour
         return false;
     }
 
+    public Room SearchRoom(int x,int y)
+    {
+        for (int i = 0; i < Roomlist.Count; i++)
+        {
+            if (Roomlist[i].Roomcoordinate.x == x && Roomlist[i].Roomcoordinate.y == y)
+            {
+                return Roomlist[i];
+            }
+        }
+        return null;
+    }
+    public Room SearchRoom(Coordinate coordinate)
+    {
+        for (int i = 0; i < Roomlist.Count; i++)
+        {
+            if (Roomlist[i].Roomcoordinate.x == coordinate.x && Roomlist[i].Roomcoordinate.y == coordinate.y)
+            {
+                return Roomlist[i];
+            }
+        }
+        return null;
+    }
+
     public void debugMapList()
     {
         for (int i = 0; i < Roomlist.Count;i++)

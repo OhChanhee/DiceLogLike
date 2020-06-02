@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DiceController : MonoBehaviour
 {
+    public Character character;
     public Sprite[] sprites;
     public Button RollBtn;
     Image curimage;
@@ -16,7 +17,15 @@ public class DiceController : MonoBehaviour
 
     public void ClickedRollBtn()
     {
-        StartCoroutine(RollTheDice());
+        if(character.PlayerTurn)
+        {
+            StartCoroutine(RollTheDice());
+        }
+        else
+        {
+            Debug.Log("플레이어의 턴이아니라서 주사위를 굴릴수없습니다");
+            //플레이어의 턴이아니라서 주사위를 굴릴수없음을 알려줌
+        }
     }
 
     private IEnumerator RollTheDice()
@@ -32,12 +41,7 @@ public class DiceController : MonoBehaviour
         }
 
         DiceNum = randomNum + 1;
+        GameManager.GetInstance().ActionPoint = DiceNum;
     }
 
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

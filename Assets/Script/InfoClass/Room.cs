@@ -7,6 +7,8 @@ public class Room : MonoBehaviour
     //좌표
     public Coordinate Roomcoordinate;
 
+    private List<GameObject> objectList = new List<GameObject>();
+    public  List<Enemy> EnemyList = new List<Enemy>();//현재 룸에있는 적리스트
     private List<Tile> Tilelist = new List<Tile>();
     ROOMType RooMType; 
 
@@ -32,11 +34,12 @@ public class Room : MonoBehaviour
     {
         map = GameObject.Find("Map").GetComponent<Map>();
         ChooseDoorDirection();
+        Invoke("Spawn", 0.1f);
     }
 
     void Update()
     {
-        CheckNearCharacter();
+       
     }
 
 
@@ -45,6 +48,7 @@ public class Room : MonoBehaviour
         if (!Spawned)
         {
             TilePlacement();
+            SetObject(); 
             Spawned = true;
         }
     }
@@ -52,21 +56,23 @@ public class Room : MonoBehaviour
 
     void TilePlacement()
     {
-        int DoorDirection = Random.Range(0, 16);//문방향 설정 0  
-
-
+        GameObject Floor;
         for (int y = 0; y < rows; y++)
         {
             for (int x = 0; x < columns; x++)
             {
                 // FloorTile 을 깔아주는 조건문            
-                GameObject Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x - 10.5f + x, gameObject.transform.position.y - 5.5f + y), FloorTile.transform.rotation);
+                Floor = Instantiate(FloorTile, new Vector2(gameObject.transform.position.x - 10.5f + x, gameObject.transform.position.y - 5.5f + y), FloorTile.transform.rotation);
                 Floor.name = "FloorTile(" + x + "," + y + ")";
                 Floor.transform.parent = this.transform;
                 Floor.GetComponent<Tile>().SetTileInfo(x, y);
                 SetTileList(Floor.GetComponent<Tile>());
             }
         }
+    }
+    void SetObject()//방타입에 따라 미리만들어둔 맵오브젝트 프리팹을 불러온다
+    {
+        
     }
 
     public void SetTileList(Tile tile)
@@ -80,19 +86,6 @@ public class Room : MonoBehaviour
         this.Roomcoordinate.x = x;
         this.Roomcoordinate.y = y;
 
-    }
-
-    public void CheckNearCharacter()
-    {
-        if ((this.Roomcoordinate.x + 1 == GameManager.GetInstance().Ch_RoomCordinate.x ||
-            this.Roomcoordinate.x - 1 == GameManager.GetInstance().Ch_RoomCordinate.x ||
-            this.Roomcoordinate.x == GameManager.GetInstance().Ch_RoomCordinate.x)
-            && (this.Roomcoordinate.y - 1 == GameManager.GetInstance().Ch_RoomCordinate.y ||
-            this.Roomcoordinate.y + 1 == GameManager.GetInstance().Ch_RoomCordinate.y ||
-            this.Roomcoordinate.y == GameManager.GetInstance().Ch_RoomCordinate.y))
-        {
-            Invoke("Spawn", 0.1f);
-        }
     }
 
     public void ChooseDoorDirection()

@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6727004618077547657}
   - component: {fileID: 6727004618077547656}
+  - component: {fileID: 9109163270699645058}
   m_Layer: 0
   m_Name: RightDoor
   m_TagString: Untagged
@@ -115,6 +116,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9109163270699645058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727004618077547655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b186a5463d2a14abe5098a66871605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpened: 0
 --- !u!1 &6727004618529430954
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6727004618529430955}
   - component: {fileID: 6727004618529430956}
+  - component: {fileID: 2188035694550524041}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -196,6 +211,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2188035694550524041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727004618529430954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b186a5463d2a14abe5098a66871605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpened: 0
 --- !u!1 &6727004618584501771
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6727004618647674457}
   - component: {fileID: 6727004618647674456}
+  - component: {fileID: 218309544688502584}
   m_Layer: 0
   m_Name: TopDoor
   m_TagString: Untagged
@@ -358,6 +387,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &218309544688502584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727004618647674455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b186a5463d2a14abe5098a66871605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpened: 0
 --- !u!1 &6727004618761234376
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153628dc65ef65144b834d802e459f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Roomcoordinate:
+    x: 0
+    y: 0
+  EnemyList: []
   TopDoor: {fileID: 6727004618647674455}
   BottomDoor: {fileID: 6727004619693445777}
   LeftDoor: {fileID: 6727004618529430954}
@@ -671,6 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6727004619693445779}
   - component: {fileID: 6727004619693445778}
+  - component: {fileID: 484784260184053996}
   m_Layer: 0
   m_Name: BottomDoor
   m_TagString: Untagged
@@ -742,6 +789,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &484784260184053996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727004619693445777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b186a5463d2a14abe5098a66871605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpened: 0
 --- !u!1 &6727004619705953523
 GameObject:
   m_ObjectHideFlags: 0
