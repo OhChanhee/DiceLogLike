@@ -59,29 +59,25 @@ public class CharacterController : MonoBehaviour
             }
         } 
     }
-    void Attack()
+    void ClickedAttackBT()
     {
         if (GameManager.GetInstance().ActionPoint > 0 && Player.PlayerTurn == true)
         {
             switch (EventSystem.current.currentSelectedGameObject.name)
             {
                 case "UPATK":
-                    
-                    GameManager.GetInstance().ActionPoint--;
+                    Attack(1);                
                     break;
                 case "DOWNATK":
-                    
-                    GameManager.GetInstance().ActionPoint--;
+                    Attack(2);
                     break;
                 case "LEFTATK":
-                
+                    Attack(3);
                     character.transform.localScale = new Vector3(1f, 1, 1);
-                    GameManager.GetInstance().ActionPoint--;
                     break;
                 case "RIGHTATK":
-                  
+                    Attack(4);
                     character.transform.localScale = new Vector3(-1f, 1, 1);
-                    GameManager.GetInstance().ActionPoint--;
                     break;
             }
         }
@@ -104,11 +100,24 @@ public class CharacterController : MonoBehaviour
         DownMoveBT.onClick.AddListener(Move);
         LeftMoveBT.onClick.AddListener(Move);
         RightMoveBT.onClick.AddListener(Move);
-        UpAttackBT.onClick.AddListener(Attack);
-        DownAttackBT.onClick.AddListener(Attack);
-        LeftAttackBT.onClick.AddListener(Attack);
-        RightAttackBT.onClick.AddListener(Attack);
+        UpAttackBT.onClick.AddListener(ClickedAttackBT);
+        DownAttackBT.onClick.AddListener(ClickedAttackBT);
+        LeftAttackBT.onClick.AddListener(ClickedAttackBT);
+        RightAttackBT.onClick.AddListener(ClickedAttackBT);
         BombBT.onClick.AddListener(SetBomb);
+    }
+
+    void Attack(int dirNum)// 1: 위쪽 2:아래쪽 3:왼쪽 4:오른쪽
+    {
+        List<Enemy> targets = Player.SearchInRangeEnemy(dirNum);
+
+        if (targets.Count == 0) return;
+
+        for(int i= 0;i < targets.Count;i++)
+        {
+            targets[i].Life -= Random.Range(Player.waepon.MinDamage, Player.waepon.MaxDamage);  
+        }
+        GameManager.GetInstance().ActionPoint--;
     }
 }
 

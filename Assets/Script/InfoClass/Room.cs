@@ -88,6 +88,18 @@ public class Room : MonoBehaviour
 
     }
 
+    public Tile SearchTile(Coordinate coordinate)
+    {
+        for (int i = 0; i < Tilelist.Count; i++)
+        {
+            if (Tilelist[i].coordinate.x == coordinate.x && Tilelist[i].coordinate.y == coordinate.y)
+            {
+                return Tilelist[i];
+            }
+        }
+        return null;
+    }
+
     public void ChooseDoorDirection()
     {
 

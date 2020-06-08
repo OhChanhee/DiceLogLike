@@ -14,6 +14,10 @@ public struct Coordinate
         this.y = y;
     }
 
+    public static Coordinate operator *(Coordinate a,Coordinate b)
+    {
+        return new Coordinate(a.x * b.x, a.y * b.y);
+    }
     public static Coordinate operator +(Coordinate a, Coordinate b)
     {
         return new Coordinate(a.x + b.x, a.y + b.y);
@@ -31,7 +35,10 @@ public struct Coordinate
         return !(a == b);
     }
 
-
+    public Coordinate Reverse()
+    {
+        return new Coordinate(y, x);
+    }
     public override bool Equals(object obj)
     {
         if (obj is Coordinate)

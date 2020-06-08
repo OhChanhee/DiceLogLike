@@ -146,7 +146,7 @@ public class Map : MonoBehaviour
     {
         for (int i = 0; i < Roomlist.Count; i++)
         {
-            if (Roomlist[i].Roomcoordinate.x == coordinate.x && Roomlist[i].Roomcoordinate.y == coordinate.y)
+            if (Roomlist[i].Roomcoordinate == coordinate)
             {
                 return Roomlist[i];
             }

@@ -10,7 +10,7 @@ public class GameManager
     public int LifeNum=10;  //남은목숨
     public int CoinValue = 0;
     public int KeyValue = 1;
-    public int BombValue = 0;
+    public int BombValue = 1;
     public int ActionPoint = 0;
 
 

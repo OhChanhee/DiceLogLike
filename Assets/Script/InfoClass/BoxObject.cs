@@ -2,23 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct Waepon
 {
     public Sprite WaeponSprite;
-    int MaxDamage;
-    int MinDamage;
-    int Range_x;
-    int Range_y;
+    public int MaxDamage;
+    public int MinDamage;
+    public List<Coordinate> range;
     
 }
-
+[System.Serializable]
 public struct Item
 {
     public Sprite ItemSprite;
-
-}
-
-public struct consumable
-{
 
 }
