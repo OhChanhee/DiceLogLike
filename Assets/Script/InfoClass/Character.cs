@@ -26,23 +26,29 @@ public class Character : MonoBehaviour
         MapCoordinate = new Coordinate(0,0);
     }
 
-    public List<Enemy> SearchInRangeEnemy(int dirNum)//캐릭터 사정거리에 들어오는 적들을 리턴함
+    public Room CurCharacterRoom()//현재 플레이어가 있는 방
+    {
+        return map.SearchRoom(MapCoordinate);
+    }
+
+
+    public List<GameObject> SearchInRangeEnemy(int dirNum)//캐릭터 사정거리에 들어오는 적들을 리턴함
     {
         
         Room CurRoom = map.SearchRoom(MapCoordinate);
-        List<Enemy> targets = new List<Enemy>();
+        List<GameObject> targets = new List<GameObject>();
         for (int i=0 ; i < CurRoom.EnemyList.Count ; i++)
         {
             for(int j=0;j< waepon.range.Count;j++)
             {
-                if (CurRoom.EnemyList[i].RoomCoordinate == MapCoordinate + SetDirection(dirNum)[i])
+                if (CurRoom.EnemyList[i].GetComponent<Enemy>().RoomCoordinate == MapCoordinate + SetDirection(dirNum)[i])
                 {
                     targets.Add(CurRoom.EnemyList[i]);
                 }
             }         
         }
     
-        return new List<Enemy>();
+        return new List<GameObject>();
     }
 
     private List<Coordinate> SetDirection(int dirNum)// 1 = 위쪽 , 2 = 아래쪽 , 3 = 왼쪽 , 4 = 오른쪽 을리턴함

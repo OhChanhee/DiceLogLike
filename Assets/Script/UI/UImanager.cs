@@ -10,6 +10,7 @@ public class UImanager : MonoBehaviour
     public Text Key_txt;
     public Text Bomb_txt;
     public Text ActionPoint_txt;
+    public Text DiceCount_txt;
     public Image WaeponImage;
     public Image ItemImage;
     void Start()
@@ -28,6 +29,7 @@ public class UImanager : MonoBehaviour
         Coin_txt.text = "x " + GameManager.GetInstance().CoinValue;
         Key_txt.text = "x " + GameManager.GetInstance().KeyValue;
         Bomb_txt.text = "x " + GameManager.GetInstance().BombValue;
+        DiceCount_txt.text = "x " + GameManager.GetInstance().DiceCount;
         ActionPoint_txt.text = "행동력 :" + GameManager.GetInstance().ActionPoint;
         WaeponImage.sprite = character.waepon.WaeponSprite;
         ItemImage.sprite = character.item.ItemSprite;

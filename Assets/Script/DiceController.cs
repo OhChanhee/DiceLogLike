@@ -9,6 +9,7 @@ public class DiceController : MonoBehaviour
     public Button RollBtn;
     Image curimage;
     private int DiceNum;
+   
     void Start()
     {
         curimage = gameObject.GetComponent<Image>();
@@ -17,7 +18,7 @@ public class DiceController : MonoBehaviour
 
     public void ClickedRollBtn()
     {
-        if(character.PlayerTurn)
+        if(character.PlayerTurn && GameManager.GetInstance().DiceCount>0)
         {
             StartCoroutine(RollTheDice());
         }
@@ -30,6 +31,7 @@ public class DiceController : MonoBehaviour
 
     private IEnumerator RollTheDice()
     {
+        GameManager.GetInstance().DiceCount--;
         int randomNum = 0;
 
          for (int i = 0;i<20;i++)
@@ -41,7 +43,7 @@ public class DiceController : MonoBehaviour
         }
 
         DiceNum = randomNum + 1;
-        GameManager.GetInstance().ActionPoint = DiceNum;
+        GameManager.GetInstance().ActionPoint += DiceNum;
     }
 
 }

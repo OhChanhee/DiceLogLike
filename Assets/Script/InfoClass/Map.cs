@@ -5,14 +5,14 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public GameObject RoomSpawner;
-    private List<Room> Roomlist = new List<Room>();
+    public List<Room> Roomlist = new List<Room>();
     private MapCrawler crawler = new MapCrawler(2);
     public int MaxRoomNum;
     public int MinRoomNum;
 
     private void Start()
     {
-        MapCrawling();  
+        MapCrawling();
     }
 
     public void SetRoomList(Room room)
@@ -31,7 +31,6 @@ public class Map : MonoBehaviour
         for (int Craw=0 ; Craw < crawler.CrawlerNum ; Craw++ )
         {
             int rand = Random.Range(MinRoomNum, MaxRoomNum + 1);// 방개수 설정
-            Debug.Log(Craw + "회차:" + rand+"개의방생성해야댐");
             for (int Count = 0; Count < rand; Count++)
             {
                 int RandomDirection = Random.Range(1, 5); // 크롤러가 이동할 방향설정          

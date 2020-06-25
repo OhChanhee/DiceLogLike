@@ -7,8 +7,7 @@ public class Room : MonoBehaviour
     //좌표
     public Coordinate Roomcoordinate;
 
-    private List<GameObject> objectList = new List<GameObject>();
-    public  List<Enemy> EnemyList = new List<Enemy>();//현재 룸에있는 적리스트
+    public List<GameObject> EnemyList = new List<GameObject>();//현재 룸에있는 적리스트
     private List<Tile> Tilelist = new List<Tile>();
     ROOMType RooMType; 
 
@@ -34,7 +33,7 @@ public class Room : MonoBehaviour
     {
         map = GameObject.Find("Map").GetComponent<Map>();
         ChooseDoorDirection();
-        Invoke("Spawn", 0.1f);
+        Invoke("Spawn", 0.3f);
     }
 
     void Update()
@@ -72,6 +71,14 @@ public class Room : MonoBehaviour
     }
     void SetObject()//방타입에 따라 미리만들어둔 맵오브젝트 프리팹을 불러온다
     {
+        GameObject ReadEnemyTemp = Resources.Load("Prefeb/EnemyTemps/EnemyTemp" + Random.Range(1, 6)) as GameObject;
+        GameObject EnemyTemp = Instantiate(ReadEnemyTemp, this.transform);
+        for (int i = 0; i< EnemyTemp.transform.childCount; i++)
+        {
+            EnemyTemp.transform.GetChild(i).GetComponent<Enemy>().MapCoordinate = Roomcoordinate;
+            EnemyList.Add(EnemyTemp.transform.GetChild(i).gameObject);
+        }
+        
         
     }
 
@@ -103,24 +110,24 @@ public class Room : MonoBehaviour
     public void ChooseDoorDirection()
     {
 
-        if (map.IsRoomCoordinate(Roomcoordinate.x + 1, Roomcoordinate.y))
+        if (!map.IsRoomCoordinate(Roomcoordinate.x + 1, Roomcoordinate.y))
         {
-            RightDoor.SetActive(true);
+            RightDoor.SetActive(false);
           
         }
-        if (map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y + 1))
+        if (!map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y + 1))
         {
-            TopDoor.SetActive(true);
+            TopDoor.SetActive(false);
           
         }
-        if (map.IsRoomCoordinate(Roomcoordinate.x - 1, Roomcoordinate.y ))
+        if (!map.IsRoomCoordinate(Roomcoordinate.x - 1, Roomcoordinate.y ))
         {
-            LeftDoor.SetActive(true);
+            LeftDoor.SetActive(false);
          
         }
-        if (map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y -1 ))
+        if (!map.IsRoomCoordinate(Roomcoordinate.x , Roomcoordinate.y -1 ))
         {
-            BottomDoor.SetActive(true);
+            BottomDoor.SetActive(false);
    
         }
     }
