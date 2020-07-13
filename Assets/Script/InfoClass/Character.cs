@@ -5,7 +5,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public Waepon waepon;
-    public Item item;
     private bool isDead = false;
     public bool PlayerTurn = true;  
     public Coordinate RoomCoordinate;//방안에서의 좌표
@@ -16,7 +15,6 @@ public class Character : MonoBehaviour
     void Start()
     {
         SetStartPosition();
-        Debug.Log(RoomCoordinate);
     }
 
     void SetStartPosition()//기본 좌표와 포지션 세팅
@@ -39,16 +37,15 @@ public class Character : MonoBehaviour
         List<GameObject> targets = new List<GameObject>();
         for (int i=0 ; i < CurRoom.EnemyList.Count ; i++)
         {
-            for(int j=0;j< waepon.range.Count;j++)
+            for (int j=0;j< waepon.range.Count;j++)
             {
-                if (CurRoom.EnemyList[i].GetComponent<Enemy>().RoomCoordinate == MapCoordinate + SetDirection(dirNum)[i])
+                if (CurRoom.EnemyList[i].GetComponent<Enemy>().RoomCoordinate == RoomCoordinate + SetDirection(dirNum)[j])
                 {
                     targets.Add(CurRoom.EnemyList[i]);
                 }
             }         
         }
-    
-        return new List<GameObject>();
+        return targets;
     }
 
     private List<Coordinate> SetDirection(int dirNum)// 1 = 위쪽 , 2 = 아래쪽 , 3 = 왼쪽 , 4 = 오른쪽 을리턴함

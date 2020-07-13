@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
     public Button RightAttackBT;
     public Button BombBT;
 
+    public Map map;
 
     private void Awake()
     {
@@ -179,8 +180,9 @@ public class CharacterController : MonoBehaviour
 
     void Attack(int dirNum)// 1: 위쪽 2:아래쪽 3:왼쪽 4:오른쪽
     {
+        Room CurRoom = map.SearchRoom(Player.RoomCoordinate);
         List<GameObject> targets = Player.SearchInRangeEnemy(dirNum);
-
+        
         if (targets.Count == 0) return;
 
         for(int i= 0;i < targets.Count;i++)
@@ -188,8 +190,10 @@ public class CharacterController : MonoBehaviour
             targets[i].GetComponent<Enemy>().Life -= Random.Range(Player.waepon.MinDamage, Player.waepon.MaxDamage);
             if(targets[i].GetComponent<Enemy>().Life <= 0)
             {
-                Destroy(targets[i]);
-                targets.RemoveAt(i);
+                Debug.Log(CurRoom.EnemyList);
+                GameObject temp = targets[i];
+               // CurRoom.EnemyList.Remove(temp);
+                Destroy(temp);     
             }
         }
         GameManager.GetInstance().ActionPoint--;

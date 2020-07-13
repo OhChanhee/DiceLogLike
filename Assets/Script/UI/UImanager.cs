@@ -32,6 +32,5 @@ public class UImanager : MonoBehaviour
         DiceCount_txt.text = "x " + GameManager.GetInstance().DiceCount;
         ActionPoint_txt.text = "행동력 :" + GameManager.GetInstance().ActionPoint;
         WaeponImage.sprite = character.waepon.WaeponSprite;
-        ItemImage.sprite = character.item.ItemSprite;
     }
 }

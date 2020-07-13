@@ -12,7 +12,7 @@ public class GameManager
     public int KeyValue = 1;
     public int BombValue = 1;
     public int ActionPoint = 0;
-    public int DiceCount = 1000;
+    public int DiceCount = 100;
 
     public Coordinate Ch_RoomCordinate; // 캐릭터가있는 방의 좌표
 

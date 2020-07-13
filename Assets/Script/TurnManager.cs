@@ -7,12 +7,11 @@ public class TurnManager : MonoBehaviour
     public Button TurnBtn;//턴상태에 따라 이미지변경필요
     public Character Player;
     public Map Map;
-    List<Enemy> EnemyList = new List<Enemy>();
+    public List<Enemy> EnemyList = new List<Enemy>();
 
     void Start()
     {
         TurnBtn.onClick.AddListener(TurnEnd);
-        BattleStart();
     }
 
     // Update is called once per frame
@@ -23,9 +22,13 @@ public class TurnManager : MonoBehaviour
 
     void BattleStart()
     {
-
-        StartCoroutine(PlayerTurn());
-            
+        Room room = Map.SearchRoom(Player.MapCoordinate);
+        Debug.Log(room.EnemyList.Count);
+        for(int i=0;i<room.EnemyList.Count;i++)
+        {
+            this.EnemyList.Add(room.EnemyList[i].GetComponent<Enemy>());
+        }
+        StartCoroutine(PlayerTurn());          
     }
     IEnumerator PlayerTurn()
     {
@@ -44,6 +47,7 @@ public class TurnManager : MonoBehaviour
             }
             else if(EnemyList.Count == 0)//몬스터를 다잡았을시 
             {
+                Debug.Log("방클리어함");
                 Room room = Map.SearchRoom(Player.MapCoordinate);
            
                 if (room.TopDoor.activeSelf == true)

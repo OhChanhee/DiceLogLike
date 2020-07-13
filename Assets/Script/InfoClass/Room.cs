@@ -18,9 +18,7 @@ public class Room : MonoBehaviour
 
     public GameObject RoomTemp; // 방 기본 구조 오브젝트
 
-    public GameObject FloorTile;
-    public GameObject WallTile;
-    public GameObject DoorTile;
+    public GameObject Floors;
 
     private Map map; // 맵정보
 
@@ -56,7 +54,9 @@ public class Room : MonoBehaviour
     void TilePlacement()
     {
         GameObject Floor;
-        for (int y = 0; y < rows; y++)
+        Floor = Instantiate(Floors,gameObject.transform);
+        Floor.transform.parent = this.transform;
+       /* for (int y = 0; y < rows; y++)
         {
             for (int x = 0; x < columns; x++)
             {
@@ -67,7 +67,7 @@ public class Room : MonoBehaviour
                 Floor.GetComponent<Tile>().SetTileInfo(x, y);
                 SetTileList(Floor.GetComponent<Tile>());
             }
-        }
+        }*/
     }
     void SetObject()//방타입에 따라 미리만들어둔 맵오브젝트 프리팹을 불러온다
     {

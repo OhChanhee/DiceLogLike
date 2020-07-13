@@ -570,12 +570,7 @@ MonoBehaviour:
   LeftDoor: {fileID: 6727004618529430954}
   RightDoor: {fileID: 6727004618077547655}
   RoomTemp: {fileID: 6727004619169584052}
-  FloorTile: {fileID: 1747858977891047955, guid: af296ffc8f6a4624a8fb28bdaa2a9e77,
-    type: 3}
-  WallTile: {fileID: 7274595126125523770, guid: a38c0dd5276400744b536c02b338ad5f,
-    type: 3}
-  DoorTile: {fileID: 6378702054048429287, guid: ed883257407675343b1649fb24e32ab5,
-    type: 3}
+  Floors: {fileID: 9074296366231161583, guid: fa0a66a9037ec1b4d949529b795b6a39, type: 3}
 --- !u!212 &624641203375048416
 SpriteRenderer:
   m_ObjectHideFlags: 0
